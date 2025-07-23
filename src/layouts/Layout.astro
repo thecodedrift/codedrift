@@ -1,22 +1,173 @@
+---
+import ChevronLeft from "../components/icons/ChevronLeft.astro";
+import ChevronRight from "../components/icons/ChevronRight.astro";
+import Chat from "../components/icons/Chat.astro";
+import Heart from "../components/icons/Heart.astro";
+import Sun from "../components/icons/Sun.astro";
+import Moon from "../components/icons/Moon.astro";
+import "../styles/global.css";
+
+const year = new Date().getFullYear();
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="en" class="group">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="me" href="https://hachyderm.io/@jakobo" />
+    <link rel="me" href="https://twitter.com/jakobo" />
+    <link rel="me" href="https://linkedin.com/in/jakobheuser" />
+    <link rel="me" href="https://github.com/jakobo" />
+    <link rel="me" href="https://twitch.tv/jakobox" />
+    <link rel="me" href="https://www.instagram.com/codedrift.social/" />
+    <link rel="me" href="https://www.reddit.com/user/Jakobox" />
+    <link rel="me" href="https://www.threads.net/@codedrift.social" />
+    <link rel="me" href="https://bsky.app/profile/codedrift.social" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <title>The CodeDrift - Jakob Heuser</title>
+  </head>
+  <body
+    class="bg-paper-stone-200 dark:bg-paper-stone-800 bg-gray-100 font-sans text-gray-800 dark:bg-gray-900 dark:text-gray-100"
+    style="margin: 0; padding: 0; overflow-x: hidden; transition: all 0.5s"
+  >
+    <div
+      id="content"
+      class="flex h-screen max-w-full min-w-full flex-col items-start"
+    >
+      <div class="h-6 w-full flex-shrink-0 bg-gray-600 dark:bg-gray-700"></div>
+      <header class="max-w-limit flex w-full flex-row px-4">
+        <a href="#content" class="sr-only" id="top"> Skip Navigation </a>
+        <a href="/" class="as-link flex h-[40px] flex-row items-center pt-2">
+          <ChevronLeft class="h-[30px] w-[30px] text-current" />
+          <ChevronRight
+            class="mt-[10px] ml-[-17px] h-[30px] w-[30px] text-current"
+          />
+          <span class="mt-[7px] ml-[-5px] hidden md:block">
+            <span class="float-left font-semibold">code</span>
+            <span class="float-left brightness-50 dark:brightness-75"
+              >drift</span
+            >
+          </span>
+        </a>
+
+        <nav
+          class="flex flex-grow flex-row items-center justify-end space-x-2 self-end"
+        >
+          <a
+            href="https://github.com/thecodedrift/codedrift/discussions/categories/thunked?discussions_q=is%3Aopen+category%3AThunked+sort%3Adate_created"
+            class="as-link"
+            title="Longer writing and thoughts">writing</a
+          >
+          <a href="/talks" class="as-link" title="Talks and Speaking">talks</a>
+          <a
+            href="https://github.com/thecodedrift/codedrift/discussions/categories/til?discussions_q=is%3Aopen+sort%3Adate_created+category%3ATIL"
+            class="as-link"
+            title="Today I Learned...">til</a
+          >
+          <a
+            href="https://github.com/jakobo/codedrift/discussions/categories/ask-me-anything-ama"
+            class="as-link"
+            title="Ask me Anything">ama</a
+          >
+          <a href="/social" title="My presence on the social web"
+            ><Chat class="as-link h-6 w-6" /></a
+          >
+          <a href="/help" title="Investing, mentoring, and more"
+            ><Heart class="as-link h-6 w-6" /></a
+          >
+          <div role="button" class="cursor-pointer" data-control="lightSwitch">
+            <Sun
+              class="hidden h-6 w-6 text-gray-500 group-[.dark]:block hover:text-gray-700 dark:hover:text-gray-300"
+            />
+            <Moon
+              class="h-6 w-6 text-gray-500 group-[.dark]:hidden hover:text-gray-700 dark:hover:text-gray-300"
+            />
+          </div>
+        </nav>
+      </header>
+      <main class="max-w-limit w-full flex-grow p-4 pt-12" id="content">
+        <slot />
+      </main>
+      <footer
+        class="bg-leather-stone-700 dark:bg-leather-stone-700 mt-8 h-20 w-full bg-gray-700 dark:bg-gray-800"
+      >
+        <div
+          class="max-w-limit flex flex-row items-center p-4 text-sm text-gray-100 dark:text-gray-200"
+        >
+          <div class="w-1/4">&lt;/&gt;</div>
+          <div class="flex-grow text-center">
+            <a
+              class="border-b border-dotted border-gray-500 hover:text-gray-300"
+              href="#top">top</a
+            >
+          </div>
+          <div class="w-1/4 text-right">
+            <a
+              href="/about"
+              class="border-b border-dotted border-gray-500 hover:text-gray-300"
+            >
+              &copy; {year} Jakob Heuser
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
+
+<script>
+  const setMode = (mode) => {
+    if (!mode) {
+      return;
+    }
+
+    document.body.parentElement?.classList.remove("light");
+    document.body.parentElement?.classList.remove("dark");
+    document.body.parentElement?.classList.add(mode);
+    localStorage.setItem("colorScheme", mode);
+  };
+
+  const handleMediaChange = (value) => {
+    if (value) {
+      setMode("dark");
+    } else {
+      setMode("light");
+    }
+  };
+
+  const mm = window.matchMedia("(prefers-color-scheme: dark)");
+  mm.addEventListener("change", (e) => handleMediaChange(e.matches));
+
+  const defaultValue = localStorage.getItem("colorScheme");
+  if (defaultValue) {
+    setMode(defaultValue);
+  }
+
+  // Find our component DOM on the page.
+  const control = document.querySelector('[data-control="lightSwitch"]');
+
+  if (control) {
+    control.addEventListener("click", function () {
+      const currentMode = document.body.parentElement?.classList.contains(
+        "dark",
+      )
+        ? "dark"
+        : "light";
+      const newMode = currentMode === "dark" ? "light" : "dark";
+      setMode(newMode);
+    });
+  }
+</script>

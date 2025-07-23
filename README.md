@@ -1,52 +1,19 @@
-# Astro Starter Kit: Basics
+# Codedrift [Posts](https://github.com/jakobo/codedrift/discussions/categories/thunked) | [TIL](https://github.com/jakobo/codedrift/discussions/categories/til) | [AMA](https://github.com/jakobo/codedrift/discussions/categories/ask-me-anything-ama)
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Personal Website of Jakob Heuser, available at https://codedrift.com
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+# Stack
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- A simple Astro site, where the bulk of the content is here on GitHub
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+# Developing
 
-## 🚀 Project Structure
+1. `pnpm dev`
 
-Inside of your Astro project, you'll see the following folders and files:
+# Outstanding Issues
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- Eventually, I'd like to return to hosting the blog content as dynamic pages. For now, I wanted to get on Astro and off of Ghost. It's probably a big post all its own, but let's just say when you type `pnpm start` and it doesn't because _checks notes_ sqlite3 is missing on a local install that runs differently from your production install, but you just wanted to edit your theme which needs to be a zip file and your dev cycle was to zip everything up, upload it, change the theme live and pray... yeah, I wanted to get off that.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+# Bugs? Probably
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+You could file bugs. They'll be triaged. I file bugs against myself, if only so I remember something's broken.

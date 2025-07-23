@@ -1,11 +1,38 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Content from "../components/Content.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+  <div class="w-full flex-shrink-0 flex-col lg:w-auto">
+    <div class="max-w-reading mx-2 lg:mx-0">
+      <h1 class="font-title mb-3 text-6xl">Hey 👋🏼, I&rsquo;m Jakob</h1>
+      <p class="font-sans text-2xl">
+        I&lsquo;m a co-founder of
+        <a href="https://taskless.io" class="as-link">Taskless</a>, removing the
+        risks associated with adopting third party services.
+      </p>
+      <p class="mt-3 mb-6 font-sans text-2xl">
+        The messy part of building things is my happy place. Ocassionally, I
+        write about
+        <a
+          href="https://github.com/thecodedrift/codedrift/discussions/categories/thunked?discussions_q=is%3Aopen+category%3AThunked+label%3A%22%F0%9F%93%9A+Code%22"
+          class="as-link"
+        >
+          code
+        </a>
+        and the
+        <a
+          href="https://github.com/thecodedrift/codedrift/discussions/categories/thunked?discussions_q=is%3Aopen+category%3AThunked+label%3A%22%F0%9F%93%9A+Leadership%22"
+          class="as-link"
+        >
+          people
+        </a>
+        who build it.
+      </p>
+    </div>
+  </div>
 </Layout>
