@@ -7,7 +7,12 @@ import Sun from "../components/icons/Sun.astro";
 import Moon from "../components/icons/Moon.astro";
 import "../styles/global.css";
 
+const DEFAULT_TITLE = "The CodeDrift - Jakob Heuser";
+const SUFFIX = ` - ${DEFAULT_TITLE}`;
+
 const year = new Date().getFullYear();
+const { title: titleProp } = Astro.props;
+const title = titleProp ? `${titleProp}${SUFFIX}` : DEFAULT_TITLE;
 ---
 
 <!doctype html>
@@ -28,7 +33,7 @@ const year = new Date().getFullYear();
     <link rel="me" href="https://bsky.app/profile/codedrift.social" />
     <meta name="generator" content={Astro.generator} />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <title>The CodeDrift - Jakob Heuser</title>
+    <title>{title}</title>
   </head>
   <body
     class="bg-paper-stone-200 dark:bg-paper-stone-800 bg-gray-100 font-sans text-gray-800 dark:bg-gray-900 dark:text-gray-100"
@@ -129,7 +134,7 @@ const year = new Date().getFullYear();
 </style>
 
 <script>
-  const setMode = (mode) => {
+  const setMode = (mode: string) => {
     if (!mode) {
       return;
     }
@@ -140,7 +145,7 @@ const year = new Date().getFullYear();
     localStorage.setItem("colorScheme", mode);
   };
 
-  const handleMediaChange = (value) => {
+  const handleMediaChange = (value: boolean) => {
     if (value) {
       setMode("dark");
     } else {
