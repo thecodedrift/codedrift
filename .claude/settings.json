@@ -1,0 +1,43 @@
+{
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(sort:*)",
+      "Bash(tail:*)",
+      "Bash(tr:*)",
+      "Bash(wc:*)",
+      "Bash(xargs sed:*)",
+      "Skill(commit)",
+      "Skill(commit:*)",
+      "WebFetch(domain:developers.cloudflare.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(pnpm:*)",
+      "Bash(git -C:*)",
+      "WebFetch(domain:api.reactrouter.com)",
+      "Bash(node firebot/query-db.test.js)",
+      "Bash(openspec:*)"
+    ],
+    "deny": ["Bash(npx:*)"],
+    "additionalDirectories": ["openspec/*"]
+  },
+  "read": {
+    "deny": [
+      "**/*.key",
+      "**/*.pem",
+      "**/.aws/**",
+      "**/.env*",
+      "**/.secrets*",
+      "**/.ssh/**",
+      "**/credentials/**",
+      "**/secrets/**"
+    ]
+  }
+}

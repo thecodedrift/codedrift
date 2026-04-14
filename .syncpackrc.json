@@ -1,0 +1,41 @@
+{
+  "workspace": true,
+  "semverRange": "^",
+  "sortFirst": [
+    "private",
+    "name",
+    "description",
+    "version",
+    "author",
+    "license",
+    "homepage",
+    "repository",
+    "scripts",
+    "type",
+    "main",
+    "module",
+    "types",
+    "exports",
+    "files",
+    "tsup",
+    "engines",
+    "packageManager",
+    "dependencies",
+    "devDependencies",
+    "peerDependencies",
+    "peerDependenciesMeta",
+    "resolutions",
+    "publishConfig"
+  ],
+  "sortAz": [
+    "contributors",
+    "engines",
+    "keywords",
+    "dependencies",
+    "devDependencies",
+    "peerDependencies",
+    "peerDependenciesMeta",
+    "scripts",
+    "workspaces"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "codedrift",
+  "main": "./cloudflare/handler.ts",
+  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_date": "2025-04-01",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./build/client",
+  },
+  "dev": {
+    "port": 8642,
+  },
+}
