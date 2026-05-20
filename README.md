@@ -1,6 +1,6 @@
 # Codedrift [Posts](https://github.com/jakobo/codedrift/discussions/categories/thunked) | [TIL](https://github.com/jakobo/codedrift/discussions/categories/til) | [AMA](https://github.com/jakobo/codedrift/discussions/categories/ask-me-anything-ama)
 
-Personal Website of Jakob Heuser, available at https://codedrift.com
+Personal Website of Jakob Heuser, available at https://www.codedrift.com
 
 # Stack
 

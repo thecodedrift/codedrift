@@ -19,7 +19,7 @@ export default function Talks() {
             podcasts I&apos;ve done, plus slides and examples. Have feedback on
             something you saw or heard? You can drop me a note with your
             thoughts on{" "}
-            <a href="https://codedrift.com/social/" rel="noreferrer">
+            <a href="/social" rel="noreferrer">
               one of the many social networks
             </a>{" "}
             I&apos;m on. Or just reach out directly to{" "}
