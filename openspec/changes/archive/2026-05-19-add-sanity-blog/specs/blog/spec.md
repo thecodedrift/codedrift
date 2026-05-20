@@ -1,0 +1,128 @@
+## ADDED Requirements
+
+### Requirement: Posts reading surface
+
+The system SHALL expose a reader surface for long-form posts under `/blog`, sourced from Sanity `post` documents.
+
+#### Scenario: Visitor opens the post index
+
+- **WHEN** a visitor navigates to `/blog`
+- **THEN** the system returns an HTML page listing all `post` documents that have a defined `publishedAt`, ordered by `publishedAt` descending, each linking to `/blog/<slug>`
+
+#### Scenario: Visitor opens a published post
+
+- **WHEN** a visitor navigates to `/blog/<slug>` and a `post` document exists with `slug.current == <slug>` and a defined `publishedAt`
+- **THEN** the system returns an HTML page rendering the post's title, publication date, hero image (if any), and body as Portable Text
+
+#### Scenario: Visitor opens a slug that does not match any post
+
+- **WHEN** a visitor navigates to `/blog/<slug>` and no `post` document matches
+- **THEN** the system returns an HTTP 404 response
+
+#### Scenario: Unpublished post is not readable
+
+- **WHEN** a `post` document exists but has no `publishedAt` set
+- **THEN** the system SHALL NOT include it in `/blog` listings and SHALL return 404 for `/blog/<slug>` requests targeting it
+
+### Requirement: TIL reading surface
+
+The system SHALL expose a reader surface for short notes under `/til`, sourced from Sanity `til` documents and addressed in a URL namespace distinct from posts.
+
+#### Scenario: Visitor opens the TIL index
+
+- **WHEN** a visitor navigates to `/til`
+- **THEN** the system returns an HTML page listing all `til` documents that have a defined `publishedAt`, ordered by `publishedAt` descending, each linking to `/til/<slug>`
+
+#### Scenario: Visitor opens a published TIL
+
+- **WHEN** a visitor navigates to `/til/<slug>` and a `til` document exists with `slug.current == <slug>` and a defined `publishedAt`
+- **THEN** the system returns an HTML page rendering the TIL's title, publication date, and body as Portable Text
+
+#### Scenario: TIL slug collision with a post slug is permitted
+
+- **WHEN** a `post` document and a `til` document share the same slug value
+- **THEN** `/blog/<slug>` resolves to the post and `/til/<slug>` resolves to the TIL independently, with no validation conflict between the two types
+
+#### Scenario: Visitor opens a slug that does not match any TIL
+
+- **WHEN** a visitor navigates to `/til/<slug>` and no `til` document matches
+- **THEN** the system returns an HTTP 404 response
+
+### Requirement: Portable Text rendering
+
+The system SHALL render the `body` field of `post` and `til` documents as Portable Text, producing semantic HTML for headings, paragraphs, lists, links, blockquotes, inline images, and code blocks.
+
+#### Scenario: Code block is rendered with syntax highlighting
+
+- **WHEN** a Portable Text body contains a `code` block with a populated `language` field
+- **THEN** the system renders the code with Prism-based syntax highlighting appropriate to the declared language
+
+#### Scenario: Inline image resolves through Sanity's image CDN
+
+- **WHEN** a Portable Text body contains an `image` block referencing a Sanity asset
+- **THEN** the system renders an `<img>` whose `src` is built by `@sanity/image-url` against the configured project and dataset
+
+#### Scenario: Unknown block type is rendered as a no-op
+
+- **WHEN** a Portable Text body contains a block type the renderer has no serializer for
+- **THEN** the system SHALL omit the block from output rather than throw
+
+### Requirement: Tag taxonomy
+
+The system SHALL model tags as a `tag` document type with `name` and `slug` fields. Both `post.tags` and `til.tags` SHALL be arrays of references to `tag` documents.
+
+#### Scenario: Editor creates a tag
+
+- **WHEN** an editor creates a `tag` document with a unique slug
+- **THEN** the tag becomes available for reference from both `post.tags` and `til.tags`
+
+#### Scenario: Tag reference is broken
+
+- **WHEN** a `post` or `til` references a `tag` document that has been deleted
+- **THEN** the system SHALL omit the missing reference from rendered output without throwing
+
+### Requirement: Embedded Sanity Studio at `/_/studio`
+
+The system SHALL mount a same-origin instance of Sanity Studio at `/_/studio/*`, code-split so the Studio bundle is not delivered to visitors of any other route.
+
+#### Scenario: Editor opens Studio
+
+- **WHEN** an editor navigates to `/_/studio`
+- **THEN** the system serves an HTML shell that lazily loads Studio and signs the editor in against the configured Sanity project
+
+#### Scenario: Visitor opens a non-Studio route
+
+- **WHEN** a visitor navigates to any route outside `/_/studio/*`
+- **THEN** the response payload SHALL NOT include the Studio bundle
+
+#### Scenario: Studio is excluded from search engines
+
+- **WHEN** any `/_/studio/*` URL is requested
+- **THEN** the response includes a `noindex, nofollow` robots directive
+
+### Requirement: Sanity client uses published perspective by default
+
+The system SHALL read Sanity content using `perspective: 'published'`. The system SHALL NOT serve draft content to public reader routes.
+
+#### Scenario: Loader reads a draft
+
+- **WHEN** a `post` or `til` exists only as a draft in Sanity
+- **THEN** the public `/blog`, `/blog/:slug`, `/til`, and `/til/:slug` routes SHALL behave as though the document does not exist
+
+### Requirement: Sanity configuration is environment-driven
+
+The system SHALL read `SANITY_PROJECT_ID` and `SANITY_DATASET` from worker `vars` and `SANITY_API_READ_TOKEN` from worker secrets. The system SHALL NOT hard-code project or dataset identifiers in source.
+
+#### Scenario: Required environment value is missing at runtime
+
+- **WHEN** the worker starts and any of `SANITY_PROJECT_ID`, `SANITY_DATASET`, or `SANITY_API_READ_TOKEN` is missing
+- **THEN** requests to any Sanity-backed route SHALL fail loudly (5xx) rather than silently fall back to a default project
+
+### Requirement: Header navigation is unchanged at launch
+
+The system SHALL ship the `/blog` and `/til` reader surfaces without adding header navigation links to them. The existing "writing" link in `codedrift-layout` SHALL continue to point to GitHub Discussions until manually updated.
+
+#### Scenario: Visitor inspects the header nav after the change ships
+
+- **WHEN** a visitor loads any page rendered through `codedrift-layout`
+- **THEN** the header nav links SHALL be identical to the pre-change set, with no `/blog` or `/til` entry added

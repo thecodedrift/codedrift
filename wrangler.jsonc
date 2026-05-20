@@ -8,6 +8,10 @@
     "directory": "./build/client",
   },
   "dev": {
-    "port": 8642,
+    "port": 5173,
+  },
+  "vars": {
+    "SANITY_PROJECT_ID": "6ar8m1y8",
+    "SANITY_DATASET": "production",
   },
 }

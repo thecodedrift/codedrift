@@ -24,4 +24,7 @@ export default defineConfig({
       },
     },
   ],
+  ssr: {
+    noExternal: [/^sanity($|\/)/, /^@sanity\//, "styled-components"],
+  },
 });
