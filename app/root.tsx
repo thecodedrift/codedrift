@@ -17,7 +17,11 @@ import "./styles/global.css";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { getTheme } = await themeSessionResolver(request);
-  return { theme: getTheme() };
+  const pathname = new URL(request.url).pathname;
+  return {
+    theme: getTheme(),
+    canonicalUrl: `https://www.codedrift.com${pathname}`,
+  };
 }
 
 function Document({ children }: { children: React.ReactNode }) {
@@ -30,6 +34,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="HandheldFriendly" content="True" />
         <meta name="viewport" content="width=device-width" />
+        <link rel="canonical" href={data.canonicalUrl} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="me" href="https://hachyderm.io/@jakobo" />
         <link rel="me" href="https://twitter.com/jakobo" />

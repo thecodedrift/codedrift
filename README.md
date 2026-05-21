@@ -4,7 +4,10 @@ Personal Website of Jakob Heuser, available at https://www.codedrift.com
 
 # Stack
 
-- A simple Astro site, where the bulk of the content is here on GitHub
+- [React Router 7](https://reactrouter.com/) (framework mode, SSR) on [Cloudflare Workers](https://workers.cloudflare.com/)
+- [Sanity](https://www.sanity.io/) as the CMS for `/blog` (long-form posts) and `/til` (short notes), with Studio embedded at `/_/studio`
+- [Tailwind CSS v4](https://tailwindcss.com/) with the typography plugin
+- [`remix-themes`](https://github.com/abereghici/remix-themes) for cookie-based SSR dark/light mode
 
 # Developing
 
