@@ -1,4 +1,4 @@
-import type { MetaFunction } from "react-router";
+import { Link, type MetaFunction } from "react-router";
 
 export const meta: MetaFunction = () => [
   { title: "The CodeDrift - Jakob Heuser" },
@@ -19,19 +19,13 @@ export default function Home() {
         <p className="mt-3 mb-6 font-sans text-2xl">
           The messy part of building things is my happy place. Ocassionally, I
           write about{" "}
-          <a
-            href="https://github.com/thecodedrift/codedrift/discussions/categories/thunked?discussions_q=is%3Aopen+category%3AThunked+label%3A%22%F0%9F%93%9A+Code%22"
-            className="as-link"
-          >
+          <Link to="/blog/tag/code" className="as-link">
             code
-          </a>{" "}
+          </Link>{" "}
           and the{" "}
-          <a
-            href="https://github.com/thecodedrift/codedrift/discussions/categories/thunked?discussions_q=is%3Aopen+category%3AThunked+label%3A%22%F0%9F%93%9A+Leadership%22"
-            className="as-link"
-          >
+          <Link to="/blog/tag/leadership" className="as-link">
             people
-          </a>{" "}
+          </Link>{" "}
           who build it.
         </p>
       </div>

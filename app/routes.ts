@@ -13,6 +13,7 @@ export default [
 
     ...prefix("blog", [
       index("routes/blog/index.tsx"),
+      route("tag/:slug", "routes/blog/tag.tsx"),
       route(":slug", "routes/blog/post.tsx"),
     ]),
 

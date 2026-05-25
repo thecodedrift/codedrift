@@ -37,7 +37,7 @@ export default function CodedriftLayout() {
 
         <nav className="flex flex-grow flex-row items-center justify-end space-x-2 self-end">
           <a
-            href="https://github.com/thecodedrift/codedrift/discussions/categories/thunked?discussions_q=is%3Aopen+category%3AThunked+sort%3Adate_created"
+            href="/blog"
             className="as-link"
             title="Longer writing and thoughts"
           >
@@ -46,19 +46,8 @@ export default function CodedriftLayout() {
           <a href="/talks" className="as-link" title="Talks and Speaking">
             talks
           </a>
-          <a
-            href="https://github.com/thecodedrift/codedrift/discussions/categories/til?discussions_q=is%3Aopen+sort%3Adate_created+category%3ATIL"
-            className="as-link"
-            title="Today I Learned..."
-          >
+          <a href="/til" className="as-link" title="Today I Learned...">
             til
-          </a>
-          <a
-            href="https://github.com/jakobo/codedrift/discussions/categories/ask-me-anything-ama"
-            className="as-link"
-            title="Ask me Anything"
-          >
-            ama
           </a>
           <a href="/social" title="My presence on the social web">
             <Chat className="as-link h-6 w-6" />
