@@ -4,14 +4,14 @@ import type { Route } from "./+types/index";
 import { cloudflareEnvironmentContext } from "~/context";
 import { getSanityClient } from "~/sanity/client";
 import { TIL_INDEX_QUERY } from "~/sanity/queries";
+import { pageMeta } from "~/seo";
 
-export const meta: MetaFunction = () => [
-  { title: "TIL — The CodeDrift" },
-  {
-    name: "description",
-    content: "Today I learned. Short notes by Jakob Heuser.",
-  },
-];
+export const meta: MetaFunction = () =>
+  pageMeta({
+    title: "TIL — The CodeDrift",
+    description: "Today I learned. Short notes by Jakob Heuser.",
+    path: "/til",
+  });
 
 interface TagReference {
   _id: string;

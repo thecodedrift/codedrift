@@ -45,6 +45,57 @@ export const til = defineType({
       type: "array",
       of: [defineArrayMember({ type: "reference", to: [{ type: "tag" }] })],
     }),
+    defineField({
+      name: "howToSteps",
+      title: "How-to steps",
+      description:
+        "Optional. When set, the entry renders a numbered step list and emits HowTo structured data. Use only when the steps are genuinely the page's how-to content.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            { name: "name", title: "Step name (optional)", type: "string" },
+            {
+              name: "text",
+              title: "Step text",
+              type: "text",
+              rows: 2,
+              validation: (rule) => rule.required(),
+            },
+          ],
+          preview: { select: { title: "name", subtitle: "text" } },
+        }),
+      ],
+    }),
+    defineField({
+      name: "faq",
+      title: "FAQ",
+      description:
+        "Optional. When set, the entry renders a Q&A list and emits FAQPage structured data. Each answer must match the displayed text.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            {
+              name: "question",
+              title: "Question",
+              type: "string",
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: "answer",
+              title: "Answer",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required(),
+            },
+          ],
+          preview: { select: { title: "question", subtitle: "answer" } },
+        }),
+      ],
+    }),
   ],
   preview: {
     select: { title: "title", subtitle: "publishedAt" },

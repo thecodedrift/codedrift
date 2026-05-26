@@ -13,6 +13,7 @@ import {
 } from "remix-themes";
 import { themeSessionResolver } from "./theme.server";
 import type { Route } from "./+types/root";
+import { SOCIAL_PROFILES, personJsonLd } from "./seo";
 import "./styles/global.css";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -33,19 +34,19 @@ function Document({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="HandheldFriendly" content="True" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href={data.canonicalUrl} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="me" href="https://hachyderm.io/@jakobo" />
-        <link rel="me" href="https://twitter.com/jakobo" />
-        <link rel="me" href="https://linkedin.com/in/jakobheuser" />
-        <link rel="me" href="https://github.com/jakobo" />
-        <link rel="me" href="https://twitch.tv/jakobox" />
-        <link rel="me" href="https://www.instagram.com/codedrift.social/" />
-        <link rel="me" href="https://www.reddit.com/user/Jakobox" />
-        <link rel="me" href="https://www.threads.net/@codedrift.social" />
-        <link rel="me" href="https://bsky.app/profile/codedrift.social" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {SOCIAL_PROFILES.map((href) => (
+          <link key={href} rel="me" href={href} />
+        ))}
         <meta name="referrer" content="no-referrer-when-downgrade" />
+        <script
+          type="application/ld+json"
+          // Site-wide Person entity; sameAs mirrors the rel=me links above.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
+        />
         <Meta />
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />

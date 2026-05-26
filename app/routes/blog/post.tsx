@@ -9,6 +9,8 @@ import { PortableText, type ImageConfig } from "~/components/portable-text";
 import { cloudflareEnvironmentContext } from "~/context";
 import { getSanityClient } from "~/sanity/client";
 import { POST_BY_SLUG_QUERY } from "~/sanity/queries";
+import { buildSignedOgImageUrl } from "~/og";
+import { SITE, absoluteUrl, pageMeta } from "~/seo";
 
 interface TagReference {
   _id: string;
@@ -22,18 +24,55 @@ interface PostEntry {
   title: string;
   slug: { current: string };
   publishedAt: string;
+  /** Author-set revision date; drives the visible "Updated" line. */
+  updatedAt?: string;
   excerpt?: string;
-  heroImage?: SanityImageSource;
+  heroImage?: SanityImageSource & { alt?: string };
   body: unknown[];
   tags?: TagReference[];
 }
 
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) return [{ title: "Not Found — The CodeDrift" }];
-  const { post } = loaderData;
+  const { post, imageConfig, ogCard } = loaderData;
+  const path = `/blog/${post.slug.current}`;
+  const description =
+    post.excerpt ?? `${post.title} — long-form writing by ${SITE.author}.`;
+  // Prefer the post's hero image as the share image; otherwise the signed card.
+  const heroImage = post.heroImage
+    ? createImageUrlBuilder(imageConfig)
+        .image(post.heroImage)
+        .width(1200)
+        .height(630)
+        .fit("crop")
+        .auto("format")
+        .url()
+    : undefined;
+  const ogImage = heroImage ?? ogCard;
+
+  const blogPosting = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt ?? post._updatedAt ?? post.publishedAt,
+    author: { "@id": SITE.personId },
+    publisher: { "@id": SITE.personId },
+    mainEntityOfPage: absoluteUrl(path),
+    url: absoluteUrl(path),
+    ...(post.excerpt ? { description: post.excerpt } : {}),
+    image: [ogImage],
+  };
+
   return [
-    { title: `${post.title} — The CodeDrift` },
-    ...(post.excerpt ? [{ name: "description", content: post.excerpt }] : []),
+    ...pageMeta({
+      title: `${post.title} — The CodeDrift`,
+      description,
+      path,
+      image: ogImage,
+      type: "article",
+    }),
+    { "script:ld+json": blogPosting },
   ];
 }
 
@@ -54,7 +93,8 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     dataset: env.SANITY_DATASET,
   };
 
-  return { post, imageConfig };
+  const ogCard = await buildSignedOgImageUrl(post.title, env.OG_SIGNATURE);
+  return { post, imageConfig, ogCard };
 }
 
 export default function BlogPost() {
@@ -66,6 +106,7 @@ export default function BlogPost() {
         .auto("format")
         .url()
     : undefined;
+  const updatedAt = post.updatedAt;
 
   return (
     <div className="w-full flex-shrink-0 flex-col lg:w-auto">
@@ -81,6 +122,19 @@ export default function BlogPost() {
               day: "numeric",
             })}
           </time>
+          {updatedAt ? (
+            <time
+              dateTime={updatedAt}
+              className="font-mono text-sm text-gray-500 dark:text-gray-400"
+            >
+              {" · Updated "}
+              {new Date(updatedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+          ) : undefined}
           <h1 className="font-title mt-1 text-5xl font-bold">{post.title}</h1>
           {post.tags && post.tags.length > 0 ? (
             <div className="mt-3 flex flex-wrap gap-1.5">
@@ -99,7 +153,7 @@ export default function BlogPost() {
         {heroSource ? (
           <img
             src={heroSource}
-            alt=""
+            alt={post.heroImage?.alt ?? post.title}
             className="mb-6 w-full rounded-md"
             loading="lazy"
           />

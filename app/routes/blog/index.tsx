@@ -5,11 +5,14 @@ import PostList, { type PostListEntry } from "~/components/post-list";
 import { cloudflareEnvironmentContext } from "~/context";
 import { getSanityClient } from "~/sanity/client";
 import { POST_INDEX_QUERY } from "~/sanity/queries";
+import { pageMeta } from "~/seo";
 
-export const meta: MetaFunction = () => [
-  { title: "Blog — The CodeDrift" },
-  { name: "description", content: "Long-form writing by Jakob Heuser." },
-];
+export const meta: MetaFunction = () =>
+  pageMeta({
+    title: "Blog — The CodeDrift",
+    description: "Long-form writing by Jakob Heuser.",
+    path: "/blog",
+  });
 
 export async function loader({ context }: Route.LoaderArgs) {
   const env = context.get(cloudflareEnvironmentContext);

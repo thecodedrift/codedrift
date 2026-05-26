@@ -18,6 +18,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@cf-wasm/og": "^0.3.8",
     "@cloudflare/vite-plugin": "^1.25.2",
     "@fission-ai/openspec": "^1.2.0",
     "@portabletext/react": "^6.2.0",

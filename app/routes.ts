@@ -3,6 +3,8 @@ import { index, layout, prefix, route } from "@react-router/dev/routes";
 
 export default [
   route("action/set-theme", "routes/action.set-theme.ts"),
+  route("sitemap.xml", "routes/sitemap.ts"),
+  route("og/card.png", "routes/og.tsx"),
   route("_/studio/*", "routes/studio.tsx"),
   layout("routes/codedrift-layout.tsx", [
     index("routes/home.tsx"),

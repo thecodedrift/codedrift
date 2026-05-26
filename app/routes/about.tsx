@@ -1,16 +1,41 @@
 import type { MetaFunction } from "react-router";
 import Content from "~/components/content";
+import { pageMeta } from "~/seo";
 
-export const meta: MetaFunction = () => [
-  { title: "About Jakob - The CodeDrift - Jakob Heuser" },
-];
+export const meta: MetaFunction = () =>
+  pageMeta({
+    title: "About Jakob Heuser - The CodeDrift",
+    description:
+      "Jakob Heuser is a co-founder of Taskless with 20+ years in software — Principal Engineer at LinkedIn, Director at Pinterest, and curriculum builder at Interview Kickstart. He writes about code and the people who build it.",
+    path: "/about",
+  });
 
 export default function About() {
   return (
     <div className="w-full flex-shrink-0 flex-col lg:w-auto">
       <div className="max-w-reading mx-2 lg:mx-0">
-        <h1 className="font-title mb-3 text-5xl font-bold">Colophon</h1>
+        <h1 className="font-title mb-3 text-5xl font-bold">
+          About Jakob Heuser
+        </h1>
         <Content>
+          <p>
+            I&apos;m Jakob Heuser — a software engineer and engineering leader
+            with more than 20 years of building behind me. I&apos;m currently a
+            co-founder of{" "}
+            <a href="https://taskless.io?ref=codedrift.com">Taskless</a>, where
+            we&apos;re removing the risks of adopting third-party services.
+          </p>
+          <p>
+            Along the way I was a Principal Engineer at LinkedIn, a Director at
+            Pinterest, and helped build curriculum at the Interview Kickstart
+            program. The messy part of building things is my happy place, and I
+            write here about <a href="/blog/tag/code">code</a> and the{" "}
+            <a href="/blog/tag/leadership">people</a> who build it. If
+            there&apos;s a way I can help on your journey, see{" "}
+            <a href="/help">how I&apos;m supporting others</a>, or find me{" "}
+            <a href="/social">elsewhere on the web</a>.
+          </p>
+          <h2 id="colophon">Colophon</h2>
           <p>
             Code for codedrift &amp; code samples posted to codedrift are
             licensed under the{" "}
@@ -68,7 +93,7 @@ export default function About() {
             tired of building.
           </p>
           <p>We are only limited by the limits we place.</p>
-          <h2 id="previous-versions">Previous Versions</h2>
+          <h3 id="previous-versions">Previous Versions</h3>
           <p>
             As best I could, I&apos;ve retrieved old screenshots from the
             Wayback Machine, before this site was ever called codedrift. From

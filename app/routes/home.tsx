@@ -1,8 +1,13 @@
 import { Link, type MetaFunction } from "react-router";
+import { pageMeta } from "~/seo";
 
-export const meta: MetaFunction = () => [
-  { title: "The CodeDrift - Jakob Heuser" },
-];
+export const meta: MetaFunction = () =>
+  pageMeta({
+    title: "The CodeDrift - Jakob Heuser",
+    description:
+      "Jakob Heuser — co-founder of Taskless. Writing about code and the people who build it.",
+    path: "/",
+  });
 
 export default function Home() {
   return (

@@ -13,6 +13,7 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   title,
   slug,
   publishedAt,
+  updatedAt,
   excerpt,
   heroImage,
   body,
@@ -39,6 +40,12 @@ export const TIL_INDEX_QUERY = `*[_type == "til" && defined(publishedAt)] | orde
   "tags": tags[]->{ _id, name, slug, type } | order(select(type == "category" => 0, type == "topic" => 1, type == "era" => 2, 3) asc, name asc),
 }`;
 
+export const SITEMAP_QUERY = `{
+  "posts": *[_type == "post" && defined(publishedAt) && defined(slug.current)] | order(publishedAt desc) { "slug": slug.current, publishedAt, _updatedAt },
+  "tils": *[_type == "til" && defined(publishedAt) && defined(slug.current)] | order(publishedAt desc) { "slug": slug.current, publishedAt, _updatedAt },
+  "tags": *[_type == "tag" && defined(slug.current)] | order(name asc) { "slug": slug.current, _updatedAt }
+}`;
+
 export const TIL_BY_SLUG_QUERY = `*[_type == "til" && slug.current == $slug][0] {
   _id,
   _updatedAt,
@@ -46,5 +53,7 @@ export const TIL_BY_SLUG_QUERY = `*[_type == "til" && slug.current == $slug][0] 
   slug,
   publishedAt,
   body,
+  howToSteps[]{ name, text },
+  faq[]{ question, answer },
   "tags": tags[]->{ _id, name, slug, type } | order(select(type == "category" => 0, type == "topic" => 1, type == "era" => 2, 3) asc, name asc),
 }`;

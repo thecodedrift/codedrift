@@ -1,17 +1,20 @@
 import type { MetaFunction } from "react-router";
 import Content from "~/components/content";
+import { pageMeta } from "~/seo";
 
-export const meta: MetaFunction = () => [
-  { title: "Here to Help - The CodeDrift - Jakob Heuser" },
-];
+export const meta: MetaFunction = () =>
+  pageMeta({
+    title: "Here to Help - The CodeDrift - Jakob Heuser",
+    description:
+      "How Jakob Heuser supports others — warm introductions, investing in developer tooling, advising, interview prep, and mentoring.",
+    path: "/help",
+  });
 
 export default function Help() {
   return (
     <div className="w-full flex-shrink-0 flex-col lg:w-auto">
       <div className="max-w-reading mx-2 lg:mx-0">
-        <h1 className="font-title mb-3 text-5xl font-bold">
-          Elsewhere on the Web
-        </h1>
+        <h1 className="font-title mb-3 text-5xl font-bold">Here to Help</h1>
         <Content>
           <p>I believe we make progress together.</p>
           <p>

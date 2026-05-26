@@ -1,8 +1,13 @@
 import type { MetaFunction } from "react-router";
+import { pageMeta } from "~/seo";
 
-export const meta: MetaFunction = () => [
-  { title: "Jakob Elsewhere on the Web - The CodeDrift - Jakob Heuser" },
-];
+export const meta: MetaFunction = () =>
+  pageMeta({
+    title: "Jakob Elsewhere on the Web - The CodeDrift - Jakob Heuser",
+    description:
+      "Where to find Jakob Heuser across the social web — Twitch, Threads, Instagram, Bluesky, GitHub, Mastodon, and more.",
+    path: "/social",
+  });
 
 export default function Social() {
   return (

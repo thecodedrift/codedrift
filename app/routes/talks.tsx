@@ -1,9 +1,14 @@
 import type { MetaFunction } from "react-router";
 import Content from "~/components/content";
+import { pageMeta } from "~/seo";
 
-export const meta: MetaFunction = () => [
-  { title: "Talks and Speaking - The CodeDrift - Jakob Heuser" },
-];
+export const meta: MetaFunction = () =>
+  pageMeta({
+    title: "Talks and Speaking - The CodeDrift - Jakob Heuser",
+    description:
+      "An archive of Jakob Heuser's talks and podcast appearances — slides, examples, and recordings on WebAssembly, MCP, scalability, and more.",
+    path: "/talks",
+  });
 
 export default function Talks() {
   return (
@@ -145,7 +150,7 @@ export default function Talks() {
               ]
             </li>
           </ul>
-          <h1 id="microphone-optional">Microphone Optional</h1>
+          <h2 id="microphone-optional">Microphone Optional</h2>
           <p>
             I enjoy speaking, despite being a massive introvert. After over 20
             years of building, I remember every time I sat in the audience and

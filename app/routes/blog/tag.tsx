@@ -5,6 +5,8 @@ import PostList, { type PostListEntry } from "~/components/post-list";
 import { cloudflareEnvironmentContext } from "~/context";
 import { getSanityClient } from "~/sanity/client";
 import { POSTS_BY_TAG_QUERY } from "~/sanity/queries";
+import { buildSignedOgImageUrl } from "~/og";
+import { absoluteUrl, pageMeta } from "~/seo";
 
 interface TagDocument {
   _id: string;
@@ -21,12 +23,33 @@ interface PostsByTagResult {
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) return [{ title: "Not Found — The CodeDrift" }];
   const { tag } = loaderData;
+  const path = `/blog/tag/${tag.slug}`;
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Blog",
+        item: absoluteUrl("/blog"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: tag.name,
+        item: absoluteUrl(path),
+      },
+    ],
+  };
   return [
-    { title: `${tag.name} — The CodeDrift` },
-    {
-      name: "description",
-      content: `Long-form writing tagged ${tag.name} by Jakob Heuser.`,
-    },
+    ...pageMeta({
+      title: `${tag.name} — The CodeDrift`,
+      description: `Long-form writing tagged ${tag.name} by Jakob Heuser.`,
+      path,
+      image: loaderData.ogImage,
+    }),
+    { "script:ld+json": breadcrumb },
   ];
 }
 
@@ -43,7 +66,8 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     throw data(undefined, { status: 404 });
   }
 
-  return { tag, posts };
+  const ogImage = await buildSignedOgImageUrl(tag.name, env.OG_SIGNATURE);
+  return { tag, posts, ogImage };
 }
 
 export default function BlogTag() {
