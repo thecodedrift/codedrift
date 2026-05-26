@@ -3,7 +3,8 @@ import {
   type PortableTextComponents,
   type PortableTextReactComponents,
 } from "@portabletext/react";
-import createImageUrlBuilder, {
+import {
+  createImageUrlBuilder,
   type SanityImageSource,
 } from "@sanity/image-url";
 import { Highlight, themes } from "prism-react-renderer";
