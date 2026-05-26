@@ -55,6 +55,13 @@ export async function signTitle(
   title: string,
   secret: string,
 ): Promise<string> {
+  if (!secret) {
+    // Fail loudly here rather than emitting Web Crypto's cryptic
+    // `DataError: Imported HMAC key length (0)` from importKey.
+    throw new Error(
+      "OG_SIGNATURE secret is missing or empty in this environment. Set it on the production worker with `wrangler secret put OG_SIGNATURE`.",
+    );
+  }
   const key = await importKey(secret);
   const signature = await crypto.subtle.sign(
     "HMAC",
@@ -70,6 +77,7 @@ export async function verifyTitle(
   signature: string,
   secret: string,
 ): Promise<boolean> {
+  if (!secret) return false;
   try {
     const key = await importKey(secret);
     return await crypto.subtle.verify(
