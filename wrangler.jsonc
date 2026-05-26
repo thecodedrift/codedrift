@@ -14,4 +14,12 @@
     "SANITY_PROJECT_ID": "6ar8m1y8",
     "SANITY_DATASET": "production",
   },
+  "observability": {
+    "logs": {
+      // `enabled: true` is needed for console.* output to be captured.
+      // `invocation_logs` covers uncaught per-request exceptions on top.
+      "enabled": true,
+      "invocation_logs": true,
+    },
+  },
 }

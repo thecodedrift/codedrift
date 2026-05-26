@@ -122,7 +122,18 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     dataset: env.SANITY_DATASET,
   };
 
-  const ogImage = await buildSignedOgImageUrl(til.title, env.OG_SIGNATURE);
+  // Don't let a signing/runtime failure 500 the TIL page; fall back to the
+  // static default share image and surface the error for observability.
+  let ogImage: string | undefined;
+  try {
+    ogImage = await buildSignedOgImageUrl(til.title, env.OG_SIGNATURE);
+  } catch (error) {
+    console.error(
+      "buildSignedOgImageUrl failed for til",
+      til.slug.current,
+      error,
+    );
+  }
   return { til, imageConfig, ogImage };
 }
 

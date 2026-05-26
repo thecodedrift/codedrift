@@ -61,7 +61,7 @@ export function meta({ data: loaderData }: Route.MetaArgs) {
     mainEntityOfPage: absoluteUrl(path),
     url: absoluteUrl(path),
     ...(post.excerpt ? { description: post.excerpt } : {}),
-    image: [ogImage],
+    ...(ogImage ? { image: [ogImage] } : {}),
   };
 
   return [
@@ -93,7 +93,18 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     dataset: env.SANITY_DATASET,
   };
 
-  const ogCard = await buildSignedOgImageUrl(post.title, env.OG_SIGNATURE);
+  // Don't let a signing/runtime failure 500 the post page; fall back to the
+  // static default share image and surface the error for observability.
+  let ogCard: string | undefined;
+  try {
+    ogCard = await buildSignedOgImageUrl(post.title, env.OG_SIGNATURE);
+  } catch (error) {
+    console.error(
+      "buildSignedOgImageUrl failed for post",
+      post.slug.current,
+      error,
+    );
+  }
   return { post, imageConfig, ogCard };
 }
 

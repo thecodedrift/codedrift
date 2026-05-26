@@ -66,7 +66,14 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     throw data(undefined, { status: 404 });
   }
 
-  const ogImage = await buildSignedOgImageUrl(tag.name, env.OG_SIGNATURE);
+  // Don't let a signing/runtime failure 500 the tag page; fall back to the
+  // static default share image and surface the error for observability.
+  let ogImage: string | undefined;
+  try {
+    ogImage = await buildSignedOgImageUrl(tag.name, env.OG_SIGNATURE);
+  } catch (error) {
+    console.error("buildSignedOgImageUrl failed for tag", tag.slug, error);
+  }
   return { tag, posts, ogImage };
 }
 
