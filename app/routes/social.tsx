@@ -5,7 +5,7 @@ export const meta: MetaFunction = () =>
   pageMeta({
     title: "Jakob Elsewhere on the Web - The CodeDrift - Jakob Heuser",
     description:
-      "Where to find Jakob Heuser across the social web — Twitch, Threads, Instagram, Bluesky, GitHub, Mastodon, and more.",
+      "Where to find Jakob Heuser across the social web — Twitch, Threads, Instagram, Bluesky, GitHub, X, LinkedIn, and more.",
     path: "/social",
   });
 
@@ -31,7 +31,7 @@ export default function Social() {
               as theCodeDrift
             </li>
             <li>
-              <a href="https://www.threads.net/@codedrift.social?ref=codedrift.com">
+              <a href="https://www.threads.com/@codedrift.social?ref=codedrift.com">
                 Threads
               </a>{" "}
               &amp;{" "}
@@ -58,6 +58,18 @@ export default function Social() {
               </a>{" "}
               as theCodeDrift
             </li>
+            <li>
+              <a href="https://x.com/theCodeDrift?ref=codedrift.com">
+                X / Twitter
+              </a>{" "}
+              as theCodeDrift
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/jakobheuser/?ref=codedrift.com">
+                LinkedIn
+              </a>{" "}
+              as Jakob Heuser
+            </li>
           </ul>
 
           <h2>Inactive Profiles</h2>
@@ -67,16 +79,6 @@ export default function Social() {
                 Mastodon @ Hacyderm
               </a>{" "}
               as @jakobo@hachyderm.io
-            </li>
-            <li>
-              <a href="https://x.com/jakobo?ref=codedrift.com">X / Twitter</a>{" "}
-              as @jakobo
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/jakobheuser/?ref=codedrift.com">
-                LinkedIn
-              </a>{" "}
-              as Jakob Heuser
             </li>
           </ul>
         </article>

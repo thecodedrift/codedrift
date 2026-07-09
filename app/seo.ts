@@ -24,13 +24,13 @@ export const SITE = {
  */
 export const SOCIAL_PROFILES = [
   "https://hachyderm.io/@jakobo",
-  "https://twitter.com/jakobo",
-  "https://linkedin.com/in/jakobheuser",
-  "https://github.com/jakobo",
-  "https://twitch.tv/jakobox",
+  "https://x.com/theCodeDrift",
+  "https://www.linkedin.com/in/jakobheuser",
+  "https://github.com/theCodeDrift",
+  "https://www.twitch.tv/theCodeDrift",
   "https://www.instagram.com/codedrift.social/",
-  "https://www.reddit.com/user/Jakobox",
-  "https://www.threads.net/@codedrift.social",
+  "https://www.reddit.com/user/theCodeDrift/",
+  "https://www.threads.com/@codedrift.social",
   "https://bsky.app/profile/codedrift.social",
 ] as const;
 
