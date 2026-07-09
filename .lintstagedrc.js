@@ -1,6 +1,6 @@
 // syncpack commands
 const syncpack = {
-  listMismatches: () => "syncpack list-mismatches",
+  lint: () => "syncpack lint",
   format: () => "syncpack format",
 };
 
@@ -9,11 +9,7 @@ const config = {
   "*.(md|json|graphql)": "prettier --write",
 
   // package.json formatting
-  "./package.json": [
-    syncpack.listMismatches,
-    syncpack.format,
-    "prettier --write",
-  ],
+  "./package.json": [syncpack.lint, syncpack.format, "prettier --write"],
 
   // source files (function form to quote paths containing $)
   "*.{js,jsx,ts,tsx}": [

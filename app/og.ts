@@ -30,7 +30,7 @@ function base64UrlEncode(bytes: ArrayBuffer): string {
     .replaceAll("=", "");
 }
 
-function base64UrlDecode(value: string): Uint8Array {
+function base64UrlDecode(value: string): Uint8Array<ArrayBuffer> {
   const padded = value.replaceAll("-", "+").replaceAll("_", "/");
   const binary = atob(padded);
   const bytes = new Uint8Array(binary.length);

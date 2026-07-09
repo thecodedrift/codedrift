@@ -3,10 +3,7 @@ import {
   type PortableTextComponents,
   type PortableTextReactComponents,
 } from "@portabletext/react";
-import {
-  createImageUrlBuilder,
-  type SanityImageSource,
-} from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 import { Highlight, themes } from "prism-react-renderer";
 
 export interface ImageConfig {
@@ -41,11 +38,7 @@ function makeComponents(
     types: {
       image: ({ value }: { value: SanityImageBlock }) => {
         if (!value?.asset?._ref) return <></>;
-        const source = builder
-          .image(value as SanityImageSource)
-          .width(1200)
-          .auto("format")
-          .url();
+        const source = builder.image(value).width(1200).auto("format").url();
         return (
           <img
             src={source}
@@ -111,9 +104,6 @@ function makeComponents(
 export function PortableText({ value, imageConfig }: PortableTextProperties) {
   if (!value) return <></>;
   return (
-    <PortableTextRoot
-      value={value as Parameters<typeof PortableTextRoot>[0]["value"]}
-      components={makeComponents(imageConfig)}
-    />
+    <PortableTextRoot value={value} components={makeComponents(imageConfig)} />
   );
 }

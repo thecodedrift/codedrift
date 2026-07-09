@@ -1,6 +1,11 @@
 {
-  "workspace": true,
-  "semverRange": "^",
+  "semverGroups": [
+    {
+      "range": "^",
+      "dependencies": ["**"],
+      "packages": ["**"]
+    }
+  ],
   "sortFirst": [
     "private",
     "name",
